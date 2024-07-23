@@ -1,0 +1,12 @@
+Package: metadeg
+Title: Meta Analysis Of RNaSeq Diferential Expression
+Version: 0.0.0.1000
+Authors@R: 
+    person("Bruno Rodrigo", "Assuncao", , "brunorodrigoassuncao@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: This does the meta analysis of RNASeq differential expression. It takes individual results of voom-lima DEGs.
+License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+    license
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
