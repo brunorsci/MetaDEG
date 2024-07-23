@@ -121,40 +121,12 @@ metadata_study1
 # Pacotes necessários
 library(limma)
 library(edgeR)
-library(MASS)  # Para o pseudo count
-
-# Função para realizar a análise de expressão diferencial
-perform_DE_analysis <- function(counts, metadata) {
-    # Merge counts and metadata
-    combined_data <- merge(metadata, counts, by = "SampleID")
-    rownames(combined_data) <- combined_data$SampleID
-    
-    # Preparar os dados de expressão e a matriz de design
-    expr_data <- combined_data[, grepl("Gene", colnames(combined_data))]
-    design <- model.matrix(~ Diagnosis, data = combined_data)
-    
-    # Criar o objeto DGEList
-    dge <- DGEList(counts = t(expr_data))
-    
-    # Normalização usando TMM
-    dge <- calcNormFactors(dge)
-    
-    # Transformação voom
-    v <- voom(dge, design)
-    
-    # Ajuste do modelo linear
-    fit <- lmFit(v, design)
-    fit <- eBayes(fit)
-    
-    # Obter os resultados
-    results <- topTable(fit, coef = "DiagnosisControl", adjust = "fdr", number = Inf)
-    return(results)
-}
+library(MASS)
 
 # Realizar a análise de expressão diferencial para cada estudo
-DE_results_study1 <- perform_DE_analysis(counts_study1, metadata_study1)
-DE_results_study2 <- perform_DE_analysis(counts_study2, metadata_study2)
-DE_results_study3 <- perform_DE_analysis(counts_study3, metadata_study3)
+DE_results_study1 <- metadeg::diff_expression(counts_study1, metadata_study1)
+DE_results_study2 <- metadeg::diff_expression(counts_study2, metadata_study2)
+DE_results_study3 <- metadeg::diff_expression(counts_study3, metadata_study3)
 ```
 
 ``` r
@@ -169,34 +141,9 @@ DE_results_study1
 ### 3. Realizar a Meta-Análise
 
 ``` r
-# Função para realizar meta-análise dos resultados de DE
-meta_analysis <- function(DE_results_list) {
-    genes <- rownames(DE_results_list[[1]])
-    meta_results <- data.frame(Gene = genes, EffectSize = NA, StdErr = NA, p.value = NA)
-
-    for (gene in genes) {
-        effect_sizes <- sapply(DE_results_list, function(res) res[gene, "logFC"])
-        variances <- sapply(DE_results_list, function(res) res[gene, "t"]^2)
-
-        # Verificar se todos os estudos possuem os coeficientes de interesse
-        valid_studies <- !is.na(effect_sizes)
-        
-        if (sum(valid_studies) > 1) {
-            # Realizar meta-análise de efeitos aleatórios
-            meta_res <- metagen(TE = effect_sizes[valid_studies], seTE = sqrt(variances[valid_studies]), sm = "SMD")
-            meta_results[meta_results$Gene == gene, "EffectSize"] <- meta_res$TE.fixed
-            meta_results[meta_results$Gene == gene, "StdErr"] <- meta_res$seTE.fixed
-            meta_results[meta_results$Gene == gene, "p.value"] <- meta_res$pval.fixed
-        }
-    }
-
-    meta_results$p.adj <- p.adjust(meta_results$p.value, method = "fdr")
-    return(meta_results)
-}
-
 # Combinar resultados de DE para a meta-análise
 DE_results_list <- list(DE_results_study1, DE_results_study2, DE_results_study3)
-meta_results <- meta_analysis(DE_results_list)
+meta_results <- metadeg::metaDEG(DE_results_list)
 
 # Visualizar os resultados da meta-análise
 meta_results
