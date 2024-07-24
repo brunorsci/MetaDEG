@@ -6,7 +6,7 @@ Bruno Rodrigo Assunção
 WORKFLOW BIOINFORMÁTICO PARA META ANALISE DE EXPRESSÃO DIFERENCIAL EM
 DADOS DE RNASEQ
 
-** INSTALL PACKAGE **
+** Install **
 ``` r
 install.packages("D:/METADEG/metadeg_0.0.0.1000.tar.gz", repos = NULL, type = "source")
 ```
