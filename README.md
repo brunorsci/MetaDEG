@@ -1,7 +1,6 @@
 # MetaDEG
 META ANALISE DE EXPRESSÃO DIFERENCIAL EM DADOS DE RNASEQ
 
-DEG Meta Analysis - RNASeq Data
 ================
 Bruno Rodrigo Assunção
 2024-07-23
