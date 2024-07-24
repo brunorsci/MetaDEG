@@ -158,6 +158,7 @@ meta_results
     ## 1 Gene1 0.006095957 0.1715450 0.9716526 0.9716526
     ## 2 Gene2 0.027284262 0.1158034 0.8137366 0.9716526
     ## 3 Gene3 0.016970869 0.1266248 0.8933830 0.9716526
+### 4. Interpretação dos resultados
 
 Interpretar os resultados da meta-análise de expressão diferencial
 envolve entender como os tamanhos de efeito combinados e os valores de p
@@ -165,7 +166,7 @@ se traduzem em conclusões sobre a expressão gênica diferencial entre
 casos e controles através de múltiplos estudos. Aqui está um guia
 detalhado sobre como interpretar esses resultados:
 
-### Resultados da Análise de Expressão Diferencial Individual
+### 4.1 Análise de Expressão Diferencial Individual
 
 Para cada estudo individual (usando `limma-voom`), os resultados típicos
 incluem:
@@ -188,7 +189,7 @@ incluem:
 - `adj.P.Val` (valor p ajustado): Valor p ajustado para múltiplos testes
   usando o método FDR (False Discovery Rate).
 
-### Resultados da Meta-Análise
+### 4.2 Resultados da Meta-Análise
 
 Após combinar os resultados dos estudos individuais, a tabela
 `meta_results` inclui:
@@ -214,7 +215,7 @@ Após combinar os resultados dos estudos individuais, a tabela
       ## 2 Gene2 0.027284262 0.1158034 0.8137366 0.9716526
       ## 3 Gene3 0.016970869 0.1266248 0.8933830 0.9716526
 
-### Como Interpretar os Resultados da Meta-Análise
+### 4.2.1 Como Interpretar os Resultados da Meta-Análise
 
 1.  **Tamanho do Efeito Combinado (`EffectSize`)**:
 
@@ -248,7 +249,7 @@ Após combinar os resultados dos estudos individuais, a tabela
       são considerados diferencialmente expressos de forma significativa
       em múltiplos estudos.
 
-### Exemplo de Interpretação
+### 5. Exemplo de Interpretação
 
 Suponha que o resultado da meta-análise para um gene específico seja:
 
@@ -276,7 +277,7 @@ Suponha que o resultado da meta-análise para um gene específico seja:
     de Gene1 entre casos e controles permanece estatisticamente
     significativa.
 
-### Conclusão
+### 6. Conclusão
 
 Interpretar os resultados da meta-análise ajuda a identificar genes que
 são consistentemente diferencialmente expressos entre casos e controles
