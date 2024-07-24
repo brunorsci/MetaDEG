@@ -3,8 +3,10 @@
 Bruno Rodrigo Assunção
 2024-07-23
 
-WORKFLOW BIOINFORMÁTICO PARA META ANALISE DE EXPRESSÃO DIFERENCIAL EM
-DADOS DE RNASEQ
+
+
+Workflow Bioinformático para Meta Análise de Expressão Diferencial em dados de RNASeq
+
 
 ** Install **
 ``` r
